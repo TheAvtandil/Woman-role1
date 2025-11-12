@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Untitled 1 - Site Title</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Georgian:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script>
+    tailwind = window.tailwind || {};
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans Georgian', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol']
+          },
+          colors: {
+            accent: '#2EE8B6'
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    html { font-family: 'Inter', 'Noto Sans Georgian', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif; }
+  </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-yellow-300 focus:text-black focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+
+  <!-- Header / Navbar -->
+  <header id="site-header" class="sticky top-0 z-50 bg-neutral-950/90 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/70 border-b border-white/30 text-white">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Primary">
+      <div class="h-14 flex items-center justify-between border-b border-white/20">
+        <!-- Left: Brand -->
+        <div class="flex items-center gap-3 min-w-0">
+          <a href="index.html" class="shrink-0 text-xl font-extrabold tracking-tight">
+            <span class="sr-only">Homepage</span>
+            ქალთა როლი
+          </a>
+        </div>
+
+        <!-- Center: Desktop Nav -->
+        <ul class="hidden md:flex items-center text-xs font-semibold uppercase tracking-wide">
+          <li><a href="page1.html" class="text-white hover:text-white/90 transition-colors">სუფრაჟისტები</a></li>
+          <li><span class="mx-3 text-white/40">/</span></li>
+          <li><a href="page2.html" class="text-white hover:text-white/90 transition-colors">პარლამენტარი ქალები</a></li>
+          <li><span class="mx-3 text-white/40">/</span></li>
+          <li><a href="page3.html" class="text-white hover:text-white/90 transition-colors">გამოგონებები</a></li>
+        </ul>
+
+        <!-- Right: Actions (kept minimal) -->
+        <div class="flex items-center gap-3">
+<!-- Search Popover (hidden by default) -->
+<div id="searchPopover" class="hidden absolute right-4 top-16 z-50 w-72 bg-neutral-900 border border-white/10 rounded-lg shadow-lg p-3">
+  <input
+    id="searchInput"
+    type="text"
+    placeholder="ძიება..."
+    class="w-full px-3 py-2 rounded bg-neutral-800 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-accent"
+    autocomplete="off"
+  />
+  <ul id="searchResults" class="mt-2 text-sm text-white">
+    <li>სუფრაჟისტები</li>
+    <li>პარლამენტარი ქალები</li>
+    <li>გამოგონებები</li>
+    <!-- Add more items as needed -->
+  </ul>
+</div>
+
+<!-- Search Button (only one, triggers popover) -->
+<button
+  id="searchBtn"
+  type="button"
+  class="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-full hover:bg-white/10"
+  aria-label="Search"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+    <circle cx="11" cy="11" r="7"/>
+    <path d="m21 21-3.5-3.5"/>
+  </svg>
+</button>
+
+<script>
+  // Toggle popover
+  const searchBtn = document.getElementById('searchBtn');
+  const searchPopover = document.getElementById('searchPopover');
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  const items = Array.from(searchResults.getElementsByTagName('li'));
+
+  document.addEventListener('click', function(e) {
+    if (searchBtn.contains(e.target)) {
+      searchPopover.classList.toggle('hidden');
+      if (!searchPopover.classList.contains('hidden')) {
+        searchInput.focus();
+      }
+    } else if (!searchPopover.contains(e.target)) {
+      searchPopover.classList.add('hidden');
+    }
+  });
+
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    items.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(query) ? '' : 'none';
+    });
+  });
+</script>
+          <!-- Mobile menu button -->
+          <button id="menuToggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 -mr-2 rounded hover:bg-white/10" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+            <svg id="iconMenu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6 hidden"><path d="M6 6l12 12M6 18L18 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- Baseline underline preserved via border-b on header -->
+  </header>
+
+  <!-- Mobile overlay menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 bg-neutral-950/95 backdrop-blur-sm translate-x-full transition-transform duration-300 ease-out" aria-hidden="true">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-14 flex items-center justify-between">
+        <a href="index.html" class="text-lg font-extrabold text-white">Site Title</a>
+        <button id="menuClose" class="inline-flex items-center justify-center w-10 h-10 -mr-2 rounded hover:bg-white/10" aria-label="Close menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M6 6l12 12M6 18L18 6"/></svg>
+        </button>
+      </div>
+      <ul class="py-3 divide-y divide-neutral-800 text-base text-white">
+        <li><a href="page1.html" class="block py-3 font-semibold">სუფრაჟისტები</a></li>
+        <li><a href="page2.html" class="block py-3 font-semibold">პარლამენტარი ქალები</a></li>
+        <li><a href="page3.html" class="block py-3 font-semibold">გამოგონებები</a></li>
+      </ul>
+    </div>
+  </div>
+
+<main id="main" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <section class="relative">
+    <!-- Decorative gradient glow -->
+    <div class="pointer-events-none absolute -top-10 -left-10 h-40 w-40 rounded-full bg-accent/20 blur-3xl"></div>
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white">
+      სუფრაჟისტები – ქალთა უფლებებისთვის მებრძოლი მოძრაობა
+    </h1>
+
+    <div class="mt-6 grid grid-cols-1">
+      <!-- Article body only, no side card -->
+      <article>
+        <div class="prose prose-invert prose-neutral max-w-none">
+          <p class="first-letter:text-5xl first-letter:font-extrabold first-letter:float-left first-letter:mr-3 first-letter:leading-[0.8] first-letter:text-white">
+            სუფრაჟისტები იყვნენ აქტივისტები, რომლებიც XIX–XX საუკუნეებში იბრძოდნენ ქალთა ხმის მიცემის უფლებისთვის. მათი მთავარი მიზანი იყო პოლიტიკურ პროცესებში ქალების ჩართვა და სამართლებრივი თანასწორობის მიღწევა მამაკაცებთან.
+          </p>
+          <p>
+            მოძრაობა დაიწყო დიდი ბრიტანეთში და სწრაფად გავრცელდა სხვა ქვეყნებშიც, განსაკუთრებით შეერთებულ შტატებში. სუფრაჟისტები აწყობდნენ მსვლელობებს, აქციებს, წერილობით კამპანიებს და ზოგჯერ სამოქალაქო დაუმორჩილებლობის აქციებსაც. ყველაზე ცნობილ ლიდერებს შორის იყვნენ ემელინ პანკჰერსტი, სიუზან ბი ენტონი და ელიზაბეთ კეიდი სტენტონი.
+          </p>
+          <p>
+            მათი აქტიურობის შედეგი იყო ის, რომ ბევრ ქვეყანაში ქალებმა მიიღეს ხმის უფლება. დიდ ბრიტანეთში ეს მოხდა 1918 წელს, ხოლო ამერიკის შეერთებულ შტატებში – 1920 წელს, როდესაც მიღებულ იქნა კონსტიტუციის მე-19 შესწორება.
+          </p>
+          <p>
+            სუფრაჟისტების მოძრაობამ საფუძველი ჩაუყარა ქალთა უფლებების განვითარებასა და გენდერული თანასწორობის იდეას თანამედროვე დემოკრატიულ საზოგადოებაში.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <!-- Subtle divider -->
+    <div class="mt-10 border-t border-white/10"></div>
+  </section>
+
+  <!-- Media frame only, no text next to it -->
+  <section class="mt-12">
+    <div class="flex justify-center">
+      <div class="rounded-xl p-[2px] bg-gradient-to-br from-accent/60 via-white/10 to-transparent w-full max-w-2xl">
+        <figure class="rounded-xl overflow-hidden flex h-96 items-center justify-center bg-transparent">
+          <img 
+            src="/fotoebi/The_Suffragist_11-22-1913_(6939611544).jpg" 
+            alt="სუფრაჟისტების პოსტერი" 
+            class="w-full h-full object-contain object-center shadow-lg"
+          />
+        </figure>
+        <p class="p-4 text-base text-white/80 border-t border-white/10">
+          სუფრაჟისტების პოსტერი
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
+        პროპაგანდისტული პოსტერები, რომლებსაც სუფრაჟისტების წინააღმდეგ იყენებდნენ
+      </h2>
+      <p class="text-white/80 mb-6">
+        სუფრაჟისტები ქალთა მოძრაობის მონაწილენი იყვნენ, რომლებიც ქალებისთვის ხმის მიცემის უფლებას ითხოვდნენ. თითქოს ძნელი დასაჯერებელია, რომ ამ მარტივი ჭეშმარიტების მტკიცებას, საპროტესტო აქციები და ქალების მხრიდან დიდი თავგანწირვა და ბრძოლა სჭირდებოდა.<br><br>
+        სინამდვილეში, ყველაფერი იმაზე რთული იყო ვიდრე წარმოგვიდგენია. სუფრაჟისტებს სდევნიდნენ, აწამებდნენ, მათ წინააღმდეგ დამცინავ, პროპაგანდისტულ კამპანიებს აწარმოებდნენ. იმისთვის, რომ უფრო კარგად გავაცნობიეროთ მაშინდელი მდგომარეობა, წარმოგიდგენთ პოსტერებს, რომლებიც სუფრაჟისტების წინააღმდეგ იყო მიმართული და სხვადასხვა თემებს ეხებოდა.
+      </p>
+<div class="flex flex-row gap-8">
+  <!-- Image Frame 1 -->
+  <div class="rounded-xl overflow-hidden max-w-lg bg-transparent">
+    <figure class="rounded-xl overflow-hidden h-96 bg-transparent">
+      <img src="/fotoebi/40wlis.jpg" alt="სუფრაჟისტების საწინააღმდეგო პოსტერის მაგალითი" class="w-full h-full object-contain object-center shadow-lg" />
+    </figure>
+    <p class="p-4 text-base text-white/80 border-t border-white/10">
+      ამ ფოტოს მიხედვით, სუფრაჟისტები მხოლოდ 40 წელს გადაცილებული, გაუთხოვარი ქალები იყვნენ.
+    </p>
+  </div>
+  <!-- Image Frame 2 -->
+  <div class="rounded-xl overflow-hidden max-w-lg bg-transparent">
+    <figure class="rounded-xl overflow-hidden h-96 bg-transparent">
+      <img src="/fotoebi/bignopse.jpg" alt="აღწერა 2" class="w-full h-full object-contain object-center shadow-lg" />
+    </figure>
+    <p class="p-4 text-base text-white/80 border-t border-white/10">
+      1-ლი წარწერა ფოტოზე: რა იციან სუფრაჟისტებმა?
+
+მე-2 წარწერა: მხოლოდ ღმერთმა იცის (სიტყვა "იცის" ნაცვლად იყენებენ სიტყვა "ცხვირს")
+
+მე-3 წარწერა: ამან ძალიან ბევრი იცის (სიტყვა "იცის" ნაცვლად იყენებენ სიტყვა "ცხვირს")
+
+მე-4 წარწერა: ამან საერთოდ არაფერი არ იცის (სიტყვა "იცის" ნაცვლად იყენებენ სიტყვა "ცხვირს")
+    </p>
+  </div>
+
+</div>
+   <div class="mt-16">
+  <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-8">
+    პოსტერები, რომლებსაც კომენტარი არ სჭირდება
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Poster 1 -->
+    <div>
+      <div class="rounded-xl p-[1px] bg-gradient-to-br from-accent/60 via-white/10 to-transparent">
+        <figure class="rounded-xl overflow-hidden h-96 bg-transparent">
+          <img src="/fotoebi/1617718130_606c7135687f7.jpg" alt="პოსტერის ფოტო 1" class="w-full h-full object-contain object-center shadow-lg" />
+        </figure>
+        <p class="p-4 text-base text-white/80 border-t border-white/10">
+          წარწერა ფოტოზე: "რას გავუკეთებდი სუფრაჟისტს"
+        </p>
+      </div>
+    </div>
+    <!-- Poster 2 -->
+    <div>
+      <div class="rounded-xl p-[1px] bg-gradient-to-br from-accent/60 via-white/10 to-transparent">
+        <figure class="rounded-xl overflow-hidden h-96 bg-transparent">
+          <img src="/fotoebi/1617718199.jpg" alt="პოსტერის ფოტო 2" class="w-full h-full object-contain object-center shadow-lg" />
+        </figure>
+        <p class="p-4 text-base text-white/80 border-t border-white/10">
+          წარწერა ფოტოზე: "აი რას გავუკეთებდი სუფრაჟისტს"
+        </p>
+      </div>
+    </div>
+    <!-- Poster 3 (add your image and description here) -->
+    <div>
+      <div class="rounded-xl p-[1px] bg-gradient-to-br from-accent/60 via-white/10 to-transparent">
+        <figure class="rounded-xl overflow-hidden h-96 bg-transparent">
+          <img src="/fotoebi/1617718423_606c7135dc4af.jpg" alt="პოსტერის ფოტო 3" class="w-full h-full object-contain object-center shadow-lg" />
+        </figure>
+        <p class="p-4 text-base text-white/80 border-t border-white/10">
+         წარწერა ფოტოზე: ხმის მიცემის უფლება ქალებისთვის
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+  </section>
+</main>
+<footer class="bg-gray-900 text-gray-200 py-4 border-t border-gray-800">
+  <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-2 text-sm">
+    <div class="flex flex-col md:flex-row md:items-center gap-2">
+      <span class="flex items-center gap-1">
+        
+        <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 10l9-6 9 6v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8z"/>
+          <path d="M9 22V12h6v10"/>
+        </svg>
+        №161
+      </span>
+      <span class="hidden md:inline mx-2 text-gray-500">|</span>
+      <span class="flex items-center gap-1">
+        
+        <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 21c-4.418 0-8-3.582-8-8a8 8 0 1116 0c0 4.418-3.582 8-8 8z"/>
+          <circle cx="12" cy="13" r="3"/>
+        </svg>
+        თინა იოსებიძის ქუჩა N50, Tbilisi
+      </span>
+      <span class="hidden md:inline mx-2 text-gray-500">|</span>
+      <span class="flex items-center gap-1">
+        
+        <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm0 14a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5a2 2 0 00-2 2v2zm14-14a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5a2 2 0 012-2h2zm0 14a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2h-2a2 2 0 00-2 2v2z"/>
+        </svg>
+        032 237 62 43
+      </span>
+      <span class="hidden md:inline mx-2 text-gray-500">|</span>
+      <span class="flex items-center gap-1">
+        
+        <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M16 12l-4-4-4 4m8 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v4"/>
+        </svg>
+        <a href="mailto:tbilisi161@mes.gov.ge" class="underline hover:text-blue-300">tbilisi161@mes.gov.ge</a>
+      </span>
+    </div>
+    <div class="text-xs text-gray-500 mt-2 md:mt-0">&copy; 2024 ქალთა როლი</div>
+  </div>
+</footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

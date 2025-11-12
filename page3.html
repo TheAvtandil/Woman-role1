@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Untitled 3 - Site Title</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Georgian:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script>
+    tailwind = window.tailwind || {};
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans Georgian', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol']
+          },
+          colors: {
+            accent: '#2EE8B6'
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    html { font-family: 'Inter', 'Noto Sans Georgian', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif; }
+  </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-yellow-300 focus:text-black focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+
+    <!-- Header / Navbar -->
+  <header id="site-header" class="sticky top-0 z-50 bg-neutral-950/90 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/70 border-b border-white/30 text-white">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Primary">
+      <div class="h-14 flex items-center justify-between border-b border-white/20">
+        <!-- Left: Brand -->
+        <div class="flex items-center gap-3 min-w-0">
+          <a href="index.html" class="shrink-0 text-xl font-extrabold tracking-tight">
+            <span class="sr-only">Homepage</span>
+            ქალთა როლი
+          </a>
+        </div>
+
+        <!-- Center: Desktop Nav -->
+        <ul class="hidden md:flex items-center text-xs font-semibold uppercase tracking-wide">
+          <li><a href="page1.html" class="text-white hover:text-white/90 transition-colors">სუფრაჟისტები</a></li>
+          <li><span class="mx-3 text-white/40">/</span></li>
+          <li><a href="page2.html" class="text-white hover:text-white/90 transition-colors">პარლამენტარი ქალები</a></li>
+          <li><span class="mx-3 text-white/40">/</span></li>
+          <li><a href="page3.html" class="text-white hover:text-white/90 transition-colors">გამოგონებები</a></li>
+        </ul>
+
+        <!-- Right: Actions (kept minimal) -->
+        <div class="flex items-center gap-3">
+<!-- Search Popover (hidden by default) -->
+<div id="searchPopover" class="hidden absolute right-4 top-16 z-50 w-72 bg-neutral-900 border border-white/10 rounded-lg shadow-lg p-3">
+  <input
+    id="searchInput"
+    type="text"
+    placeholder="ძიება..."
+    class="w-full px-3 py-2 rounded bg-neutral-800 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-accent"
+    autocomplete="off"
+  />
+  <ul id="searchResults" class="mt-2 text-sm text-white">
+    <li>სუფრაჟისტები</li>
+    <li>პარლამენტარი ქალები</li>
+    <li>გამოგონებები</li>
+    <!-- Add more items as needed -->
+  </ul>
+</div>
+
+<!-- Search Button (only one, triggers popover) -->
+<button
+  id="searchBtn"
+  type="button"
+  class="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-full hover:bg-white/10"
+  aria-label="Search"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+    <circle cx="11" cy="11" r="7"/>
+    <path d="m21 21-3.5-3.5"/>
+  </svg>
+</button>
+
+<script>
+  // Toggle popover
+  const searchBtn = document.getElementById('searchBtn');
+  const searchPopover = document.getElementById('searchPopover');
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  const items = Array.from(searchResults.getElementsByTagName('li'));
+
+  document.addEventListener('click', function(e) {
+    if (searchBtn.contains(e.target)) {
+      searchPopover.classList.toggle('hidden');
+      if (!searchPopover.classList.contains('hidden')) {
+        searchInput.focus();
+      }
+    } else if (!searchPopover.contains(e.target)) {
+      searchPopover.classList.add('hidden');
+    }
+  });
+
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    items.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(query) ? '' : 'none';
+    });
+  });
+</script>
+          <!-- Mobile menu button -->
+          <button id="menuToggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 -mr-2 rounded hover:bg-white/10" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+            <svg id="iconMenu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6 hidden"><path d="M6 6l12 12M6 18L18 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- Baseline underline preserved via border-b on header -->
+  </header>
+
+  <!-- Mobile overlay menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 bg-neutral-950/95 backdrop-blur-sm translate-x-full transition-transform duration-300 ease-out" aria-hidden="true">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-14 flex items-center justify-between">
+        <a href="index.html" class="text-lg font-extrabold text-white">Site Title</a>
+        <button id="menuClose" class="inline-flex items-center justify-center w-10 h-10 -mr-2 rounded hover:bg-white/10" aria-label="Close menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M6 6l12 12M6 18L18 6"/></svg>
+        </button>
+      </div>
+      <ul class="py-3 divide-y divide-neutral-800 text-base text-white">
+        <li><a href="page1.html" class="block py-3 font-semibold">სუფრაჟისტები</a></li>
+        <li><a href="page2.html" class="block py-3 font-semibold">პარლამენტარი ქალები</a></li>
+        <li><a href="page3.html" class="block py-3 font-semibold">გამოგონებები</a></li>
+      </ul>
+    </div>
+  </div>
+
+<main id="main" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <!-- Page Title -->
+  <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white text-center mb-8">
+    გამოგონებები, რომლებიც ქალებმა შექმნეს და სამყარო შეცვალეს
+  </h1>
+
+  <!-- Intro Image -->
+
+  <!-- Inventors List -->
+  <section class="space-y-12">
+    <!-- ჰედი ლამარი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">ჰედი ლამარი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (2).jpg" alt="ჰედი ლამარი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: კომუნიკაციის საიდუმლო საშუალება, რომელიც დინამიურად ცვლიდა სამაუწყებლო სიხშირეს (ეს მტრის სიგნალების დაჭერას აძნელებდა). 1962 წლიდან მოწყობილობას იყენებდნენ ამერიკულ ტორპედოებში, ახლა გამოიყენება მობილურ კომუნიკაციებსა და Wi-Fi-ში.
+      </p>
+    </div>
+
+    <!-- სტეფანი კვოლეკი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">სტეფანი კვოლეკი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images.jpg" alt="სტეფანი კვოლეკი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: კევლარი – განსაკუთრებული სიმტკიცის ბოჭკოვანი ქსოვილი, რომელსაც დღეს ჩაფხუტების და ჯავშანჟილეტის წარმოებაში იყენებენ.
+      </p>
+    </div>
+
+
+    <!-- მარიონ დონოვანი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">მარიონ დონოვანი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (1).jpg" alt="მარიონ დონოვანი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: წყალგაუმტარი საფარი ბავშვის საფენისთვის.
+      </p>
+    </div>
+
+    <!-- ელ დოლორეს ჯონსი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">ელ დოლორეს ჯონსი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (11).jpg" alt="ელ დოლორეს ჯონსი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: აკუსტიკური მაყუჩი
+      </p>
+    </div>
+
+    <!-- მელიტა ბენცი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">მელიტა ბენცი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (9).jpg" alt="მელიტა ბენცი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: ქაღალდის ფილტრი ყავისთვის.
+      </p>
+    </div>
+
+    <!-- მერი ანდერსონი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">მერი ანდერსონი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (3).jpg" alt="მერი ანდერსონი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: მინასაწმენდი ავტომობილისთვის.
+      </p>
+    </div>
+
+
+    <!-- ტაბითა ბებიტი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">ტაბითა ბებიტი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (5).jpg" alt="ტაბითა ბებიტი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: მრგვალი ხერხი
+      </p>
+    </div>
+
+
+    <!-- პატრისია ბეთი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">პატრისია ბეთი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (14).jpg" alt="პატრისია ბეთი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: კატარაქტის ლაზერული ქირურგიის მეთოდები.
+      </p>
+    </div>
+
+    <!-- მარი ვან ბრიტანი ბრაუნი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">მარი ვან ბრიტანი ბრაუნი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (10).jpg" alt="მარი ვან ბრიტანი ბრაუნი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: ვიდეო სამეთვალყურეო სისტემა.
+      </p>
+    </div>
+
+    <!-- გრეის ჰოპერი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">გრეის ჰოპერი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/Camhi-Hedy-Lamarr-doc.png" alt="გრეის ჰოპერი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: კომპილატორი – პროგრამა, რომელიც პროგრამირების ენაზე დაწერილ ტექსტს თარგმნის მანქანური კოდების ნაკრებად.
+      </p>
+    </div>
+
+    <!-- ნენსი მარია დონალდონ ჯონსონი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">ნენსი მარია დონალდონ ჯონსონი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (4).jpg" alt="ნენსი მარია დონალდონ ჯონსონი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: მექანიკური სანაყინეს საყინულე.
+      </p>
+    </div>
+
+    <!-- ბეტ ნესმითი გრეჰემი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">ბეტ ნესმითი გრეჰემი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (7).jpg" alt="ბეტ ნესმითი გრეჰემი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: შტრიხი (კორექტორი)
+      </p>
+    </div>
+
+    <!-- მარია თელქსი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">მარია თელქსი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (12).jpg" alt="მარია თელქსი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: გათბობა მზის ბატარეებზე.
+      </p>
+    </div>
+
+    <!-- პეტსი შერმანი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">პეტსი შერმანი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (13).jpg" alt="პეტსი შერმანი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: „სკოჩგარდი“ – ტენიანობის და ცხიმის საწინააღმდეგო საჟღენთი ქსოვილისთვის.
+      </p>
+    </div>
+
+    <!-- ლიზი მეგი -->
+    <div>
+      <h2 class="text-xl font-bold text-center text-accent mb-2">ლიზი მეგი</h2>
+      <div class="flex justify-center mb-3">
+        <img src="/fotoebi/images (6).jpg" alt="ლიზი მეგი" class="rounded-lg shadow w-full max-w-xs object-cover" />
+      </div>
+      <p class="text-center text-white/80">
+        გამოგონება: შექმნა თამაში „მიწის მესაკუთრე“, მონოპოლიის წინამორბედი.
+      </p>
+    </div>
+  </section>
+</main>
+<footer class="bg-gray-900 text-gray-200 py-4 border-t border-gray-800">
+  <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-2 text-sm">
+    <div class="flex flex-col md:flex-row md:items-center gap-2">
+      <span class="flex items-center gap-1">
+        
+        <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 10l9-6 9 6v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8z"/>
+          <path d="M9 22V12h6v10"/>
+        </svg>
+        №161
+      </span>
+      <span class="hidden md:inline mx-2 text-gray-500">|</span>
+      <span class="flex items-center gap-1">
+        
+        <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 21c-4.418 0-8-3.582-8-8a8 8 0 1116 0c0 4.418-3.582 8-8 8z"/>
+          <circle cx="12" cy="13" r="3"/>
+        </svg>
+        თინა იოსებიძის ქუჩა N50, Tbilisi
+      </span>
+      <span class="hidden md:inline mx-2 text-gray-500">|</span>
+      <span class="flex items-center gap-1">
+        
+        <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm0 14a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5a2 2 0 00-2 2v2zm14-14a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5a2 2 0 012-2h2zm0 14a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2h-2a2 2 0 00-2 2v2z"/>
+        </svg>
+        032 237 62 43
+      </span>
+      <span class="hidden md:inline mx-2 text-gray-500">|</span>
+      <span class="flex items-center gap-1">
+        
+        <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M16 12l-4-4-4 4m8 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v4"/>
+        </svg>
+        <a href="mailto:tbilisi161@mes.gov.ge" class="underline hover:text-blue-300">tbilisi161@mes.gov.ge</a>
+      </span>
+    </div>
+    <div class="text-xs text-gray-500 mt-2 md:mt-0">&copy; 2024 ქალთა როლი</div>
+  </div>
+</footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
